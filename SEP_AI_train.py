@@ -1,12 +1,14 @@
 """main file for training and testing the model"""
 import matplotlib.pyplot as plt
 import numpy as np
+import pandas as pd
 import torch
 import cv2
 import time
 import torchvision.transforms as transforms
 import torch.optim as optim
 import torchvision.transforms.functional as FT
+from sklearn.linear_model import LinearRegression
 from tqdm import tqdm  # for a progress bar for training so it looks cool
 from PIL import Image
 from torch.utils.data import DataLoader
@@ -32,10 +34,10 @@ LEARNING_RATE = 2e-5
 DEVICE = "cuda" if torch.cuda.is_available else "cpu"
 BATCH_SIZE = 8  # lower this depending on your gpu capabilities while training i was using a gtx 1660 super 6gb
 WEIGHT_DECAY = 0
-EPOCHS = 100  # number of times the model will train for
+EPOCHS = 20  # number of times the model will train for
 NUM_WORKERS = 2
 PIN_MEMORY = True
-LOAD_MODEL = True  # make false if you dont want to load the saved checkpoint
+LOAD_MODEL = False  # make false if you dont want to load the saved checkpoint
 LOAD_MODEL_FILE = "overfit.pth.tar"  # where the checkpoints are stored
 IMG_DIR = "archive/images"  # where the dataset images are stored
 LABEL_DIR = "archive/labels"  # where the dataset images are stored
@@ -129,7 +131,7 @@ def main():
 
     for epoch in range(EPOCHS):
         """uncomment this to test the object recognition"""
-        #for x, y in train_loader:
+        # for x, y in train_loader:
         #    x = x.to(DEVICE)
         #    for idx in range(8):
         #        bounds = cellboxes_to_boxes(model(x))
@@ -158,7 +160,7 @@ def main():
             time.sleep(10)
 
         train_fn(train_loader, model, optimizer, loss_fn)
-
+        
 
 if __name__ == "__main__":
     main()

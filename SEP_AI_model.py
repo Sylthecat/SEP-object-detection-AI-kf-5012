@@ -108,7 +108,10 @@ class Net(nn.Module):
 
 
 """test if the model works"""
-# def test(S=7, B=2, C=20):
+
+
+#def test(S=7, B=2, C=20):
 #    model = Net(split_size=S, num_boxes=B, num_classes=C)
 #    x = torch.randn((2, 3, 448, 448))
 #    print(model(x).shape)
+#test()
